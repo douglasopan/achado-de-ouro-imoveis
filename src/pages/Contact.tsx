@@ -43,7 +43,7 @@ const Contact = () => {
           <Button type="submit" variant="cta">Enviar</Button>
         </form>
         <aside className="space-y-2 text-sm">
-          <a href="https://wa.me/550000000000" target="_blank" rel="noreferrer" className="underline">Falar no WhatsApp</a>
+          <a href="https://wa.me/5511964427133" target="_blank" rel="noreferrer" className="underline">Falar no WhatsApp</a>
           <p>
             Ou envie um e-mail para <a href="mailto:contato@achadourado.com.br" className="underline">contato@achadourado.com.br</a>
           </p>

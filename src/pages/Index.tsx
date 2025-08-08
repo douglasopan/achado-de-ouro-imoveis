@@ -18,7 +18,7 @@ const Index = () => {
           "@type": "Organization",
           name: "Achadourado.com.br",
           url: typeof window !== 'undefined' ? window.location.origin : 'https://achadourado.com.br',
-          sameAs: ["https://wa.me/551100000000"],
+          sameAs: ["https://wa.me/5511964427133"],
         }}
       />
 

@@ -58,7 +58,7 @@ const PropertyDetail = () => {
   }
 
   const waMessage = encodeURIComponent(`Olá! Tenho interesse no imóvel: ${property.title} (ID ${property.id}).`);
-  const waLink = `https://wa.me/550000000000?text=${waMessage}`;
+  const waLink = `https://wa.me/5511964427133?text=${waMessage}`;
 
   return (
     <main className="container mx-auto px-6 py-16">

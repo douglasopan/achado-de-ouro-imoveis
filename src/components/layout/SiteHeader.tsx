@@ -21,7 +21,7 @@ const SiteHeader = () => {
             <Button variant="cta" size="sm">Encontrar imóveis</Button>
           </Link>
           <Link to="/auth" className="hidden md:inline-block">
-            <Button variant="outline" size="sm">Área Admin</Button>
+            <Button variant="outline" size="sm"></Button>
           </Link>
         </div>
       </div>

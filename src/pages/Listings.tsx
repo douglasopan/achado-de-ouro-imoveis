@@ -1,10 +1,12 @@
 import SEO from "@/components/SEO";
 import { useMemo, useState } from "react";
-import { allProperties, type PropertyType } from "@/data/mockProperties";
+import type { Property, PropertyType } from "@/data/mockProperties";
 import PropertyCard from "@/components/PropertyCard";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const Listings = () => {
   const [location, setLocation] = useState("");
@@ -12,8 +14,35 @@ const Listings = () => {
   const [priceMin, setPriceMin] = useState<string>("");
   const [priceMax, setPriceMax] = useState<string>("");
 
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["properties", "published"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("properties")
+        .select("id, title, location, price, type, badge, discount_percent, published, main_image_url, image_urls")
+        .eq("published", true)
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      // Map to our UI Property shape
+      const mapped: Property[] = (data || []).map((row: any) => ({
+        id: row.id,
+        title: row.title,
+        location: row.location,
+        price: Number(row.price),
+        type: row.type as PropertyType,
+        mainImage: row.main_image_url || (row.image_urls?.[0] ?? ""),
+        images: (row.image_urls ?? []) as string[],
+        badge: (row.badge as "gold" | "verified" | null) ?? null,
+        discountPercent: row.discount_percent ?? undefined,
+        published: row.published ?? true,
+      }));
+      return mapped;
+    },
+  });
+
   const filtered = useMemo(() => {
-    return allProperties.filter((p) => {
+    const list = data || [];
+    return list.filter((p) => {
       const matchLocation = location ? p.location.toLowerCase().includes(location.toLowerCase()) : true;
       const matchType = type ? p.type === type : true;
       const min = priceMin ? parseInt(priceMin) : 0;
@@ -21,7 +50,7 @@ const Listings = () => {
       const matchPrice = p.price >= min && p.price <= max;
       return matchLocation && matchType && matchPrice;
     });
-  }, [location, type, priceMin, priceMax]);
+  }, [data, location, type, priceMin, priceMax]);
 
   return (
     <main className="container mx-auto px-6 py-16">
@@ -66,10 +95,12 @@ const Listings = () => {
       </section>
 
       <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((p) => (
+        {isLoading && <div className="col-span-full text-muted-foreground">Carregando imóveis...</div>}
+        {error && <div className="col-span-full text-destructive">Erro ao carregar imóveis.</div>}
+        {!isLoading && !error && filtered.map((p) => (
           <PropertyCard key={p.id} property={p} />
         ))}
-        {filtered.length === 0 && (
+        {!isLoading && !error && filtered.length === 0 && (
           <div className="col-span-full text-muted-foreground">Nenhum imóvel encontrado com os filtros selecionados.</div>
         )}
       </section>

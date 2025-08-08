@@ -16,6 +16,8 @@ import AdminDashboard from "./pages/AdminDashboard";
 import { HelmetProvider } from "react-helmet-async";
 import SiteHeader from "./components/layout/SiteHeader";
 import SiteFooter from "./components/layout/SiteFooter";
+import Auth from "./pages/Auth";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -35,8 +37,9 @@ const App = () => (
             <Route path="/imovel/:id" element={<PropertyDetail />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/contato" element={<Contact />} />
-            <Route path="/admin" element={<AdminLogin />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin" element={<Auth />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

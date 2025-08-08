@@ -17,7 +17,7 @@ const SiteFooter = () => {
         </nav>
         <div className="text-sm">
           <p><a className="hover:underline" href="mailto:contato@achadourado.com.br">contato@achadourado.com.br</a></p>
-          <p className="mt-1"><a className="hover:underline" href="https://wa.me/550000000000" target="_blank" rel="noreferrer">WhatsApp</a></p>
+          <p className="mt-1"><a className="hover:underline" href="https://wa.me/5511964427133" target="_blank" rel="noreferrer">WhatsApp</a></p>
         </div>
       </div>
       <div className="border-t py-4 text-center text-xs text-muted-foreground">© {currentYear} Achadourado.com.br. Todos os direitos reservados.</div>

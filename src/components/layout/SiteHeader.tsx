@@ -19,10 +19,7 @@ const SiteHeader = () => {
         <div className="flex items-center gap-3">
           <Link to="/imoveis" className="hidden md:inline-block">
             <Button variant="cta" size="sm">Encontrar imóveis</Button>
-          </Link>
-          <Link to="/auth" className="hidden md:inline-block">
-            <Button variant="outline" size="sm">Área Admin</Button>
-          </Link>
+
         </div>
       </div>
     </header>

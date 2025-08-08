@@ -14,7 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      properties: {
+        Row: {
+          badge: string | null
+          created_at: string
+          description: string | null
+          discount_percent: number | null
+          id: string
+          image_urls: string[]
+          location: string
+          main_image_url: string | null
+          price: number
+          published: boolean
+          title: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          badge?: string | null
+          created_at?: string
+          description?: string | null
+          discount_percent?: number | null
+          id?: string
+          image_urls?: string[]
+          location: string
+          main_image_url?: string | null
+          price: number
+          published?: boolean
+          title: string
+          type: string
+          updated_at?: string
+        }
+        Update: {
+          badge?: string | null
+          created_at?: string
+          description?: string | null
+          discount_percent?: number | null
+          id?: string
+          image_urls?: string[]
+          location?: string
+          main_image_url?: string | null
+          price?: number
+          published?: boolean
+          title?: string
+          type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
